@@ -19,8 +19,9 @@ body{
 
 .header{
     background-image: url("food-table.jpg");
-    padding: 0.1em;
-    font-size: 3em;
+    background-repeat: none;
+    font-size: 5em;
+    padding: 0.5em;
     text-align: center;
     color: white;
     text-shadow:
@@ -83,8 +84,28 @@ li.dropdown {
 /* Create three equal columns that floats next to each other */
 .column {
     float: left;
-    width: 33.33%;
     padding: 1em;
+}
+
+/* Left and right column */
+.column.side {
+    width: 25%;
+}
+
+/* Middle column */
+.column.middle {
+    width: 50%;
+}
+
+.column>h2{
+    font-size: 2em;
+    margin: 1em;
+    font-weight: bold;
+}
+
+.column>p{
+    font-size: 1em;
+    margin: 2em;
 }
 
 /* Clear floats after the columns */
@@ -104,13 +125,18 @@ li.dropdown {
 /* Style the footer */
 .footer {
     background-color: #f1f1f1;
-    padding: 0.5em;
+    padding: 1em;
     text-align: center;
 }
+
+
+
+
 
 div.recipe {
     width: 33%;
     margin: 1em;
+    margin-bottom: 1em;
 }
 
 div.img-desc {
@@ -121,19 +147,47 @@ div.img-desc {
 
 div.recipe-desc {
     margin-top: 2em;
+    margin-bottom: 1em;
     text-align: left;
     font-size: 100%;
     background-color: lightyellow;
 }
 
+ul.ingredients{
+    list-style: disc;
+    margin: 1em;
+}
+
 ul.directions {
-    margin: 1em 0;
+    list-style: disc;
+    margin: 1em;
 }
 
 .directions li {
     padding: 0.5em 0;
 }
 
-.recipe-title {
+div.recipe-title {
     font-size: 130%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+
+div.recipe-title>h2{
+    font-size: 2em;
+}
+
+
+.boxed {
+  background-color: white;
+  border: 1px solid gray;
+  padding: 1em;
+  padding-bottom: 2em;
+  margin-bottom: 1em;
+}
+
+.boxed>p{
+    font-style: italic;
+    padding-top: 1em;
 }
