@@ -25,10 +25,10 @@ body{
     text-align: center;
     color: white;
     text-shadow:
-		-1px -1px 0 #000,
-		1px -1px 0 #000,
-		-1px 1px 0 #000,
-		1px 1px 0 #000;
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
 ul.dropdown-ul {
     list-style-type: none;
@@ -180,14 +180,70 @@ div.recipe-title>h2{
 
 
 .boxed {
-  background-color: white;
-  border: 1px solid gray;
-  padding: 1em;
-  padding-bottom: 2em;
-  margin-bottom: 1em;
+    background-color: white;
+    border: 1px solid gray;
+    padding: 1em;
+    padding-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 .boxed>p{
     font-style: italic;
     padding-top: 1em;
 }
+
+
+div.calendar{
+    background: rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+    padding: 1em;
+    width: 80em;
+    margin: 1em;
+}
+
+div.calendar>header{
+    overflow: clear;
+    position: relative;
+    font-size: 2em;
+    font-weight: 1000;
+    margin: 0 0 10px;
+    text-align: center;
+}
+
+div.calendar>table{
+    background: #fff;
+    border-collapse: collapse;
+    color: #222;
+    font-size: 1em;
+    width: 100%;
+    }
+
+div.calendar th {
+    color: black;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+div.calendar td {
+    position: relative;
+    border: 1px solid #ccc;
+    color: #444;
+    line-height: 2em;
+    padding-left: 0.5em;
+    height: 10em;
+    width: 14.2%;
+    font-style: italic;
+}
+
+.selected img{
+    width: 90%;
+    display: block; 
+}
+
+
+
