@@ -30,6 +30,24 @@ body{
         -1px 1px 0 #000,
         1px 1px 0 #000;
 }
+
+.header a{
+    position: absolute;
+    color: white;
+    font-size: 0.4em;
+    text-align: right;
+    top: 0;
+    right: 0;
+    margin: 0.5em;
+    
+}
+
+.header a:hover{
+    color:#00A0C6; 
+    text-decoration:none; 
+    cursor:pointer;
+}
+
 ul.dropdown-ul {
     list-style-type: none;
     margin: 0;
