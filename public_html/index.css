@@ -15,6 +15,7 @@ body{
     font-size: 100%;
     background-color: #e9e4f0;
     margin: 0;
+    min-height: 100%
 }
 
 .header{
@@ -156,6 +157,8 @@ li.dropdown {
     background-color: #f1f1f1;
     padding: 1em;
     text-align: center;
+    overflow:hidden;
+    bottom:0;
 }
 
 
@@ -311,3 +314,65 @@ div.calendar td {
     opacity: 0.8;
 }
 
+
+/* Comment tables*/
+
+.recipe table{
+    border-collapse:separate;
+    width: 75%;
+    margin-bottom: 1em;
+    border-spacing: 0.4em;
+}
+
+.recipe td {
+    position: relative;
+    overflow: auto; /*this was needed to place delete button top right */
+    padding: 8px;
+    text-align: left;
+    border: 1px solid lightgrey;
+    background-color: white;
+    
+}
+.comment-author{
+    color: black;
+    font-size: 1.3em;
+    margin-bottom: 0.7em;
+    font-weight: bold;
+    margin-left: 0.5em;
+}
+
+.comment-text{
+    margin-left: 0.2em;
+}
+
+.delete-form{
+    position:absolute;
+    top: 0px;
+    right: 0.2em;
+}
+
+.delete-form input[type=submit]{
+    padding:5px 15px; 
+    background:pink; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}
+
+.post-form input[type=text]{
+    margin-top: 0.6em;
+    margin-bottom: 1em;
+    width: 100%;
+    padding-bottom: 4em;
+    text-align: top;
+}
+
+.post-form input[type=submit]{
+    padding:5px 15px; 
+    background:lightgreen; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}

@@ -149,12 +149,13 @@ and open the template in the editor.
                             list($id, $author, $comment) = explode(":", $row)
                             ?>
                             <tr>
-                                <td><?= $author ?> said: <?= $comment ?>
+                                <td><p class="comment-author"><?= $author ?>: </p>
+                                    <p class="comment-text">   <?= $comment ?></p>
 
                                 <?php if (isset($_SESSION['username']) && $_SESSION['username'] == $author): ?>
-                                    <form action="" method="post">
+                                    <form class ="delete-form" action="" method="post">
                                         <input type="hidden" name="delete" value=<?= $id . ',' . $author?>><br>
-                                        <input type="submit" value="delete">
+                                        <input type="submit" value="Delete">
                                     </form>
                                 <?php endif; ?>
 
@@ -167,8 +168,9 @@ and open the template in the editor.
 
 
             <?php if (isset($_SESSION['username'])): ?>
-                <form action="" method="post">
-                    Write a comment as <?= $_SESSION['username'] ?> <input type="text" name="comment" value="" placeholder="Comment..."><br>
+                <form class="post-form" action="" method="post">
+                    Write a comment as <?= $_SESSION['username'] ?>:
+                    <input type="text" name="comment" value="" placeholder="Comment..."><br>
                     <input type="submit" value="Post">
                 </form>
 

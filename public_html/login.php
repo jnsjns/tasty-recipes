@@ -65,7 +65,8 @@ and open the template in the editor.
         <div class="login">
             
             <?php if(isset($_SESSION['username'])): ?>
-                <p>You are logged in as <?=$_SESSION['username']?></p>
+                <p>You are now logged in as <?=$_SESSION['username']?></p>
+                <p>Have fun browsing the site!</p>
                 <p><a href="?logout=1">Logout</a></p>
             <?php else: ?>
 
