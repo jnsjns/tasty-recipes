@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(isset($_GET['logout'])) {
+    Session_destroy();
+    header('Location:  ' . $_SERVER['PHP_SELF']);
+}
+?>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -15,17 +24,22 @@ and open the template in the editor.
     <body>
         <div class="header">
             <h1>Tasty Recipes</h1>
-            <p><a href="login.html">Log in</a></p>
+            <?php if(isset($_SESSION['username'])): ?>
+                <p>You are logged in as <?=$_SESSION['username']?> <a href="?logout=1">Logout</a></p>
+                
+            <?php else: ?>
+            <p><a href="login.php">Log in</a></p>
+            <?php endif; ?>
         </div>  
 
         <ul class="dropdown-ul">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="calendar.html">Calendar</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="calendar.php">Calendar</a></li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Recipes</a>
                 <div class="dropdown-content">
-                    <a href="pancakes.html">Pancakes</a>
-                    <a href="meatballs.html">Meatballs</a>
+                    <a href="pancakes.php">Pancakes</a>
+                    <a href="meatballs.php">Meatballs</a>
                 </div>
             </li>
         </ul>
