@@ -83,7 +83,7 @@ and open the template in the editor.
                     <td>14</td>
                     <td>15</td>
                     <td class="selected">16
-                        <a href="meatballs.html">
+                        <a href="meatballs.php">
                             <img src="meatballs.jpg" alt="Meatballs">
                         </a>
                     </td>
@@ -103,7 +103,7 @@ and open the template in the editor.
                 <tr>
                     <td>27</td>
                     <td class="selected">28
-                        <a href="pancakes.html">
+                        <a href="pancakes.php">
                             <img src="pancakes.jpg" alt="Pancakes">
                         </a>
                     </td>

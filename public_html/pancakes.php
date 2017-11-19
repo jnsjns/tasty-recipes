@@ -1,11 +1,43 @@
 <?php
 session_start();
 
-if(isset($_GET['logout'])) {
+
+$commentData = file('comments.txt');
+
+if (isset($_GET['logout'])) {
     Session_destroy();
     header('Location:  ' . $_SERVER['PHP_SELF']);
 }
 
+if (isset($_POST['comment'])) {
+    $user = $_SESSION['username'];
+    $uniqueId= time();
+    $data = $uniqueId . ':' . $user . ':' . $_POST['comment'] . "\n";
+    $ret = file_put_contents('comments.txt', $data, FILE_APPEND | LOCK_EX);
+    if ($ret === false) {
+        die('There was an error writing this file');
+    } else {
+        echo "$ret bytes written to file";
+    }
+    echo "<meta http-equiv='refresh' content='0'>";
+}
+
+if (isset($_POST['delete'])){
+    var_dump($_POST);
+    $deleteInfo = $_POST['delete'];
+    list($deleteId, $deleteAuthor) = explode(",", $deleteInfo);
+    if($_SESSION['username'] == $deleteAuthor){
+        foreach($commentData as $line){
+            list($id, $author, $comment) = explode(":", $line);
+            if ($id == $deleteId){
+                $contents = file_get_contents('comments.txt');
+                $contents = str_replace($line, '', $contents);
+                file_put_contents('comments.txt', $contents);
+            }
+        }
+    }
+    echo "<meta http-equiv='refresh' content='0'>";
+}
 
 ?>
 
@@ -29,11 +61,11 @@ and open the template in the editor.
 
         <div class="header">
             <h1>Tasty Recipes</h1>
-            <?php if(isset($_SESSION['username'])): ?>
-                <p>You are logged in as <?=$_SESSION['username']?> <a href="?logout=1">Logout</a></p>
-                
+            <?php if (isset($_SESSION['username'])): ?>
+                <p>You are logged in as <?= $_SESSION['username'] ?> <a href="?logout=1">Logout</a></p>
+
             <?php else: ?>
-            <p><a href="login.php">Log in</a></p>
+                <p><a href="login.php">Log in</a></p>
             <?php endif; ?>
         </div>
 
@@ -97,21 +129,45 @@ and open the template in the editor.
                 <h3>Comments</h3>
             </div>
 
+            <?php if (count($commentData) > 0): ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($commentData as $row):
+                            list($id, $author, $comment) = explode(":", $row)
+                            ?>
+                            <tr>
+                                <td><?= $author ?> said: <?= $comment ?>
 
-            <div class="boxed">
+                                <?php if (isset($_SESSION['username']) && $_SESSION['username'] == $author): ?>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="delete" value=<?= $id . ',' . $author?>><br>
+                                        <input type="submit" value="delete">
+                                    </form>
+                                <?php endif; ?>
 
-                <h3>Jonas said:</h3>
-                <p>Wow what a great dish it was so fun to make and tasated delicious! This is a very long comment 
-                    This is a very long comment This is a very long comment This is a very long comment </p>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
 
-            </div>
 
-            <div class="boxed">
+            <?php if (isset($_SESSION['username'])): ?>
+                <form action="" method="post">
+                    Write a comment as <?= $_SESSION['username'] ?> <input type="text" name="comment" value="" placeholder="Comment..."><br>
+                    <input type="submit" value="Post">
+                </form>
 
-                <h3>Martin said:</h3>
-                <p>I tried to make this dish but failed again, the recipes on this website are too difficult for me...</p>
+            <?php else: ?>
+                <p>Please <a href="login.php">Log in</a> to write comments.</p>
+            <?php endif; ?>
 
-            </div>
 
 
 
