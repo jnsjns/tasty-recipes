@@ -1,13 +1,6 @@
 <?php
 session_start();
 
-//testing users
-/*$userinfo = array(
-                'user1'=>'password1',
-                'user2'=>'password2'
-                );
-*/
-
 if(isset($_GET['logout'])) {
     Session_destroy();
     header('Location:  ' . $_SERVER['PHP_SELF']);
@@ -27,6 +20,7 @@ if(isset($_POST['username'])) {
         $message = "Username and/or Password incorrect.\\nTry again.";
         echo "<script type='text/javascript'>alert('$message');</script>";
     }
+    echo "<meta http-equiv='refresh' content='0'>";
 }
 ?>
 
@@ -77,10 +71,12 @@ and open the template in the editor.
 
             <h1>Login</h1>
             <form method="post" action="">
-                <p><input type="text" name="username" value="" placeholder="Username"></p>
-                <p><input type="password" name="password" value="" placeholder="Password"></p>
+                <label><b>Username</b></label>
+                <p><input type="text" name="username" value="" placeholder="username"></p>
+                <label><b>Password</b></label>
+                <p><input type="password" name="password" value="" placeholder="password"></p>
 
-                <p class="submit"><input type="submit" name="commit" value="Login"></p>
+                <button type="submit">Login</button>
             </form>
             <?php endif; ?>
         </div> 

@@ -2,7 +2,7 @@
 session_start();
 
 
-$commentData = file('comments.txt');
+$commentData = file('pancake-comments.txt');
 
 if (isset($_GET['logout'])) {
     Session_destroy();
@@ -13,7 +13,7 @@ if (isset($_POST['comment'])) {
     $user = $_SESSION['username'];
     $uniqueId= time();
     $data = $uniqueId . ':' . $user . ':' . $_POST['comment'] . "\n";
-    $ret = file_put_contents('comments.txt', $data, FILE_APPEND | LOCK_EX);
+    $ret = file_put_contents('pancake-comments.txt', $data, FILE_APPEND | LOCK_EX);
     if ($ret === false) {
         die('There was an error writing this file');
     } else {
@@ -30,9 +30,9 @@ if (isset($_POST['delete'])){
         foreach($commentData as $line){
             list($id, $author, $comment) = explode(":", $line);
             if ($id == $deleteId){
-                $contents = file_get_contents('comments.txt');
+                $contents = file_get_contents('pancake-comments.txt');
                 $contents = str_replace($line, '', $contents);
-                file_put_contents('comments.txt', $contents);
+                file_put_contents('pancake-comments.txt', $contents);
             }
         }
     }
