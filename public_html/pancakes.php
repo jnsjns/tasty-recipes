@@ -23,7 +23,6 @@ if (isset($_POST['comment'])) {
 }
 
 if (isset($_POST['delete'])){
-    var_dump($_POST);
     $deleteInfo = $_POST['delete'];
     list($deleteId, $deleteAuthor) = explode(",", $deleteInfo);
     if($_SESSION['username'] == $deleteAuthor){
@@ -143,29 +142,25 @@ and open the template in the editor.
                             <tr>
                                 <td><p class="comment-author"><?= $author ?>: </p>
                                       <p class="comment-text">   <?= $comment ?></p>
-
                                 <?php if (isset($_SESSION['username']) && $_SESSION['username'] == $author): ?>
                                     <form class ="delete-form" action="" method="post">
                                         <input type="hidden" name="delete" value=<?= $id . ',' . $author?>><br>
                                         <input type="submit" value="Delete">
                                     </form>
                                 <?php endif; ?>
-
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             <?php endif; ?>
-
-
+            
             <?php if (isset($_SESSION['username'])): ?>
                 <form class="post-form" action="" method="post">
                     Write a comment as <?= $_SESSION['username'] ?>:
                     <input type="text" name="comment" value="" placeholder="Comment..."><br>
                     <input type="submit" value="Post">
                 </form>
-
             <?php else: ?>
                 <p>Please <a href="login.php">Log in</a> to write comments.</p>
             <?php endif; ?>
