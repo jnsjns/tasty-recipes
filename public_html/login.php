@@ -1,21 +1,31 @@
 <?php
 session_start();
 
-if(isset($_GET['logout'])) {
+$cookie_name = "user";
+$cookie_value = "";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+
+
+if (isset($_GET['logout'])) {
     Session_destroy();
     header('Location:  ' . $_SERVER['PHP_SELF']);
 }
 
-if(isset($_POST['username'])) {
+if (isset($_POST['username'])) {
     $accountData = file('accounts.txt');
     $accessData = array();
     foreach ($accountData as $line) {
         list($savedUser, $savedPass) = explode(':', $line);
         $accessData[trim($savedUser)] = trim($savedPass);
     }
-    if($accessData[$_POST['username']] === $_POST['password']) {
+    if ($accessData[$_POST['username']] === $_POST['password']) {
         $_SESSION['username'] = $_POST['username'];
-    }else {
+        if (!isset($_COOKIE[$cookie_name])) {
+            $cookie_name = "user";
+            $cookie_value = $_POST['username'];
+            setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+        }
+    } else {
         //Invalid Login
         $message = "Username and/or Password incorrect.\\nTry again.";
         echo "<script type='text/javascript'>alert('$message');</script>";
@@ -41,11 +51,11 @@ and open the template in the editor.
     <body>
         <div class="header">
             <h1>Tasty Recipes</h1>
-            <?php if(isset($_SESSION['username'])): ?>
-                <p>You are logged in as <?=$_SESSION['username']?> <a href="?logout=1">Logout</a></p>
-                
+            <?php if (isset($_SESSION['username'])): ?>
+                <p>You are logged in as <?= $_SESSION['username'] ?> <a href="?logout=1">Logout</a></p>
+
             <?php else: ?>
-            <p><a href="login.php">Log in</a></p>
+                <p><a href="login.php">Log in</a></p>
             <?php endif; ?>
         </div>  
 
@@ -63,22 +73,22 @@ and open the template in the editor.
 
 
         <div class="login">
-            
-            <?php if(isset($_SESSION['username'])): ?>
-                <p>You are now logged in as <?=$_SESSION['username']?></p>
+
+            <?php if (isset($_SESSION['username'])): ?>
+                <p>You are now logged in as <?= $_COOKIE[$cookie_name] ?></p>
                 <p>Have fun browsing the site!</p>
                 <p><a href="?logout=1">Logout</a></p>
             <?php else: ?>
 
-            <h1>Login</h1>
-            <form method="post" action="">
-                <label><b>Username</b></label>
-                <p><input type="text" name="username" value="" placeholder="username"></p>
-                <label><b>Password</b></label>
-                <p><input type="password" name="password" value="" placeholder="password"></p>
+                <h1>Login</h1>
+                <form method="post" action="">
+                    <label><b>Username</b></label>
+                    <p><input type="text" name="username" value="" placeholder="username"></p>
+                    <label><b>Password</b></label>
+                    <p><input type="password" name="password" value="" placeholder="password"></p>
 
-                <button type="submit">Login</button>
-            </form>
+                    <button type="submit">Login</button>
+                </form>
             <?php endif; ?>
         </div> 
 
